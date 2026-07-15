@@ -1,0 +1,6 @@
+{
+  "name": "IT Asset Management System",
+  "description": "A robust, fully-featured IT Asset Management System including a real-time dashboard, branches, product catalogs, HRMS, purchase tracking, inventory operations, approval workflows, cash books, reports, and role-based access.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

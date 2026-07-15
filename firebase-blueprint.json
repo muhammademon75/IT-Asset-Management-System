@@ -1,0 +1,283 @@
+{
+  "entities": {
+    "Branch": {
+      "title": "Branch",
+      "description": "IT Assets branch location",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "location": { "type": "string" },
+        "mobile": { "type": "string" },
+        "manager": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "assetCount": { "type": "integer" }
+      },
+      "required": ["id", "name"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Asset category",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] }
+      },
+      "required": ["id", "name"]
+    },
+    "Brand": {
+      "title": "Brand",
+      "description": "Manufacturer Brand",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] }
+      },
+      "required": ["id", "name"]
+    },
+    "UoM": {
+      "title": "UoM",
+      "description": "Unit of Measurement",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] }
+      },
+      "required": ["id", "name"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "IT Hardware/Software product catalog item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "brandId": { "type": "string" },
+        "uomId": { "type": "string" },
+        "unitPrice": { "type": "number" },
+        "initialQty": { "type": "number" },
+        "currentQty": { "type": "number" },
+        "serialNo": { "type": "string" },
+        "modelNo": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] },
+        "lastUpdated": { "type": "string" }
+      },
+      "required": ["id", "name"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "Staff member details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "identity": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "designationId": { "type": "string" },
+        "hireDate": { "type": "string" },
+        "branchId": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "On Leave", "Terminated"] }
+      },
+      "required": ["id", "name"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Company department",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] }
+      },
+      "required": ["id", "name"]
+    },
+    "Designation": {
+      "title": "Designation",
+      "description": "Job designation role",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Inactive"] }
+      },
+      "required": ["id", "name"]
+    },
+    "Supplier": {
+      "title": "Supplier",
+      "description": "Hardware/Software supplier details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "balanceAmount": { "type": "number" }
+      },
+      "required": ["id", "name"]
+    },
+    "Purchase": {
+      "title": "Purchase",
+      "description": "IT Purchase requisition/order tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "supplierId": { "type": "string" },
+        "invNo": { "type": "string" },
+        "purchaseDate": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "discount": { "type": "number" },
+        "grandTotal": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected", "Draft", "Confirmed"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "supplierId", "referenceNo"]
+    },
+    "PurchaseReturn": {
+      "title": "PurchaseReturn",
+      "description": "Returned IT purchase requisition",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "purchaseId": { "type": "string" },
+        "supplierId": { "type": "string" },
+        "returnDate": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Received"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "purchaseId", "referenceNo"]
+    },
+    "Delivery": {
+      "title": "Delivery",
+      "description": "IT Assets delivery/issue manifest",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "branchId": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "deliveryDate": { "type": "string" },
+        "items": { "type": "array" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected", "Draft"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "branchId", "referenceNo"]
+    },
+    "Sale": {
+      "title": "Sale",
+      "description": "Sale or decommission of assets",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerName": { "type": "string" },
+        "saleDate": { "type": "string" },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "paymentStatus": { "type": "string", "enum": ["Paid", "Unpaid"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "customerName", "referenceNo"]
+    },
+    "Adjustment": {
+      "title": "Adjustment",
+      "description": "Inventory count audit adjustment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "adjustmentDate": { "type": "string" },
+        "type": { "type": "string", "enum": ["Addition", "Subtraction"] },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "referenceNo"]
+    },
+    "InternalTransfer": {
+      "title": "InternalTransfer",
+      "description": "Internal asset transfer between branches",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "fromBranchId": { "type": "string" },
+        "toBranchId": { "type": "string" },
+        "transferDate": { "type": "string" },
+        "items": { "type": "array" },
+        "status": { "type": "string", "enum": ["Completed", "Pending"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "fromBranchId", "toBranchId", "referenceNo"]
+    },
+    "Requisition": {
+      "title": "Requisition",
+      "description": "Staff/Branch internal asset request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "branchId": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "requestedDate": { "type": "string" },
+        "items": { "type": "array" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "branchId", "employeeId", "referenceNo"]
+    },
+    "CashTransaction": {
+      "title": "CashTransaction",
+      "description": "Financial ledger ledger transaction record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string" },
+        "type": { "type": "string", "enum": ["Received", "Payment"] },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "description": { "type": "string" },
+        "referenceNo": { "type": "string" }
+      },
+      "required": ["id", "date", "type", "amount", "referenceNo"]
+    },
+    "CashCategory": {
+      "title": "CashCategory",
+      "description": "Custom transaction category for cash book",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "type": { "type": "string", "enum": ["Expense", "Income", "Loan", "Loan Return"] }
+      },
+      "required": ["id", "name", "type"]
+    }
+  },
+  "firestore": {
+    "branches": { "schema": "Branch", "description": "Branch locations" },
+    "categories": { "schema": "Category", "description": "Asset categories" },
+    "brands": { "schema": "Brand", "description": "Brand labels" },
+    "uoms": { "schema": "UoM", "description": "Units of Measurement" },
+    "products": { "schema": "Product", "description": "Product catalog list" },
+    "departments": { "schema": "Department", "description": "Organizational departments" },
+    "designations": { "schema": "Designation", "description": "Organizational roles" },
+    "employees": { "schema": "Employee", "description": "Employees database" },
+    "suppliers": { "schema": "Supplier", "description": "Asset suppliers" },
+    "purchases": { "schema": "Purchase", "description": "Purchased assets records" },
+    "purchase_returns": { "schema": "PurchaseReturn", "description": "Purchase returns" },
+    "deliveries": { "schema": "Delivery", "description": "Deliveries to branches" },
+    "sales": { "schema": "Sale", "description": "Asset decommissioning sales" },
+    "adjustments": { "schema": "Adjustment", "description": "Audit inventory adjustments" },
+    "internal_transfers": { "schema": "InternalTransfer", "description": "Branch-to-branch transfers" },
+    "requisitions": { "schema": "Requisition", "description": "Branch internal asset requests" },
+    "cash_transactions": { "schema": "CashTransaction", "description": "Cash book transactions" },
+    "cash_categories": { "schema": "CashCategory", "description": "Cash book categories" }
+  }
+}
